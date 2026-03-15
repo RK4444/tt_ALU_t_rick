@@ -120,7 +120,7 @@ module tt_um_ALU_t_rick
    input  ena,
    input  [7:0] ui_in,
    input  [7:0] uio_in,
-   output [7:0] ou_out,
+   output [7:0] uo_out,
    output [7:0] uio_out,
    output [7:0] uio_oe);
   wire [3:0] porta;
@@ -255,7 +255,7 @@ module tt_um_ALU_t_rick
   wire [3:0] n177_o;
   reg [7:0] n178_q;
   wire [7:0] n179_o;
-  assign ou_out = n178_q;
+  assign uo_out = n178_q;
   assign uio_out = n179_o;
   assign uio_oe = n3_o;
   /* ../tt_um_ALU_t_rick.vhdl:22:12  */
