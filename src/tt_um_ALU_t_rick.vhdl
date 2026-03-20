@@ -50,15 +50,24 @@ begin
      process (ui_in, uio_in, clk, ena, rst_n)
      begin
         if rst_n = '0' then
-            uo_out <= (others => '0');
-            uio_out <= (others => '0');
+            uo_out(7 downto 2) <= (others => '0');
+            uio_out(7 downto 1) <= (others => '0');
         elsif rising_edge(clk) then
             if ena = '1' then
-                uo_out <= ui_in;
-                uio_out <= uio_in;
+                uo_out(7 downto 2) <= ui_in(7 downto 2);
+                uio_out(7 downto 1) <= uio_in(7 downto 1);
             end if;
         end if;
      end process;
+
+     device : entity work.fullAdder(rtl)
+        port map (
+            carryIn => ui_in(0),
+            summand1 => ui_in(0),
+            summand2 => ui_in(1),
+            sum => uo_out(0),
+            carryOut => uo_out(1)
+        );
     -- uio_out(7) <= ena;
     -- uio_out(6 downto 3) <= (others => '0'); --set all outputs of the bidirectional pins to zero so they're not optimized away
     -- uio_out(2 downto 0) <= uio_in(7 downto 5);
